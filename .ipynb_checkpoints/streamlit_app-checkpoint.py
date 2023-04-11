@@ -13,6 +13,8 @@ from nltk.classify import accuracy as nltk_accuracy
 
 # Define the Streamlit app
 def app():
+    from spacy.cli import download
+    download("en_core_web_sm")
     tokenizer = ToktokTokenizer()
     nlp = spacy.load('en_core_web_sm', disable=['ner'])
 
