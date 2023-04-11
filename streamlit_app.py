@@ -128,12 +128,53 @@ def app():
         st.write('Removing URL...')
         train['text']=train['text'].apply(remove_URL)        
         st.write('Removing numbers...')
-        train['text']=train['text'].apply(remove_numbers)            
+        train['text']=train['text'].apply(remove_numbers) 
+        st.text('We look at our dataset after the pre-processing steps')
+        st.write(train.head(50))
+        def cleanse(word):
+            rx = re.compile(r'\D*\d')
+            if rx.match(word):
+            return ''
         
+            return word
+        def remove_alphanumeric(strings):
+            nstrings= [" ".join(filter(None, (cleanse(word) for word in string.split()))) for string in strings.split()]
+            str1=' '.join(nstrings)
+            return str1
+        st.write('Removing alpha numeric data...')
+        train['text']=train['text'].apply(remove_alphanumeric)
+        st.text('We look at our dataset after the pre-processing steps')
+        st.write(train.head(50))
         
+        def lemmatize_text(text):
+            text = nlp(text)
+            text = ' '.join([word.lemma_ if word.lemma_ != '-PRON-' else word.text for word in text])
+            return text
         
+        st.write('We lemmatize the words...')
+        train['text']=train['text'].apply(lemmatize_text)
+        train['sentiment']=train['text'].apply(lambda tweet: TextBlob(tweet).sentiment)
+        st.text('We look at our dataset after more pre-processing steps')
+        st.write(train.head(50))
         
-    
+        sentiment_series=train['sentiment'].tolist()
+        columns = ['polarity', 'subjectivity']
+        df1 = pd.DataFrame(sentiment_series, columns=columns, index=train.index)
+        result = pd.concat([train, df1], axis=1)
+        result.drop(['sentiment'],axis=1, inplace=True)
+        
+        result.loc[result['polarity']>=0.3, 'Sentiment'] = "Positive"
+        result.loc[result['polarity']<0.3, 'Sentiment'] = "Negative"
+        
+        result.loc[result['label']==1, 'Sentiment_label'] = 1
+        result.loc[result['label']==0, 'Sentiment_label'] = 0
+        
+        st.write(result)
+        
+        counts = result['Sentiment'].value_counts()
+        st.write(counts)
+
+
 # run the app
 if __name__ == "__main__":
     app()
