@@ -32,13 +32,27 @@ def app():
     st.subheader("(c) 2023 Louie F. Cervantes, M.Eng.")
     
     st.subheader('The TextBlob Package')
-    st.write('TextBlob is a Python package for natural language processing (NLP) tasks such as part-of-speech tagging, sentiment analysis, and text classification. It is built on top of the popular Natural Language Toolkit (NLTK) and provides a simple and intuitive API for performing various NLP tasks.')
+    st.write('TextBlob is a Python package for natural language processing (NLP) \
+    tasks such as part-of-speech tagging, sentiment analysis, and text classification. \
+    It is built on top of the popular Natural Language Toolkit (NLTK) and provides a \
+    simple and intuitive API for performing various NLP tasks.')
     
     st.subheader('Sentiment Analysis')
-    st.write("Sentiment analysis is the process of determining the emotional tone of a piece of text. TextBlob provides two properties for sentiment analysis: polarity and subjectivity. /n/nPolarity refers to the degree to which the text expresses a positive or negative sentiment. Polarity is represented as a float value between -1.0 and 1.0, where -1.0 represents a completely negative sentiment, 0.0 represents a neutral sentiment, and 1.0 represents a completely positive sentiment./n/nSubjectivity, on the other hand, refers to the degree to which the text expresses a subjective or objective viewpoint. Subjectivity is also represented as a float value between 0.0 and 1.0, where 0.0 represents a completely objective viewpoint and 1.0 represents a completely subjective viewpoint.")
+    st.write("Sentiment analysis is the process of determining the emotional tone of a \
+    piece of text. TextBlob provides two properties for sentiment analysis: polarity and \
+    subjectivity. /n/nPolarity refers to the degree to which the text expresses a positive \
+    or negative sentiment. Polarity is represented as a float value between -1.0 and 1.0, \
+    where -1.0 represents a completely negative sentiment, 0.0 represents a neutral \
+    sentiment, and 1.0 represents a completely positive sentiment./n/nSubjectivity, on the \
+    other hand, refers to the degree to which the text expresses a subjective or objective \
+    viewpoint. Subjectivity is also represented as a float value between 0.0 and 1.0, where \
+    0.0 represents a completely objective viewpoint and 1.0 represents a completely \
+    subjective viewpoint.")
     
     st.subheader('Movie Review Dataset')
-    st.write('We load a movie review dataset containing 2 columns: text - contains the text of the review, and label - contains the 0 for negative and 1 for positive reviews. The dataset contains 40,000 rows of data. We load the first 20 rows for viewing.')
+    st.write('We load a movie review dataset containing 2 columns: text - contains the text \
+    of the review, and label - contains the 0 for negative and 1 for positive reviews. The \
+    dataset contains 40,000 rows of data. We load the first 20 rows for viewing.')
     
     with st.echo(code_location='below'):
         
@@ -112,7 +126,7 @@ def app():
             
             st.write('We then randomly select 500 samples of positive reviews and \
             500 samples of negative reviews.  Remember the labels were added by \
-            human reviwers and may not be the real sentiment.  We will use AI \
+            human reviewers and may not be the real sentiment.  We will use AI \
             to generate a new setiment value based on the analysis of the actual \
             text of the review.')
             
