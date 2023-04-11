@@ -10,13 +10,13 @@ from textblob import TextBlob
 from nltk.tokenize.toktok import ToktokTokenizer
 import re
 from nltk.classify import accuracy as nltk_accuracy
+from spacy.cli import download
+download("en_core_web_sm")
+tokenizer = ToktokTokenizer()
+nlp = spacy.load('en_core_web_sm', disable=['ner'])
 
 # Define the Streamlit app
 def app():
-    from spacy.cli import download
-    download("en_core_web_sm")
-    tokenizer = ToktokTokenizer()
-    nlp = spacy.load('en_core_web_sm', disable=['ner'])
 
     st.title("TextBlob Sentiment Analysis")      
     st.subheader("(c) 2023 Louie F. Cervantes, M.Eng.")
