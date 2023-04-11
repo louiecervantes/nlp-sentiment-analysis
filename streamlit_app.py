@@ -152,11 +152,13 @@ def app():
             text = ' '.join([word.lemma_ if word.lemma_ != '-PRON-' else word.text for word in text])
             return text
         
-        st.write('We lemmatize the words...')
+        st.write('We lemmatize the words. \
+                  \nThis process could take up to several minutes to complete. Please wait....')
+        
         train['text']=train['text'].apply(lemmatize_text)
         
         train['sentiment']=train['text'].apply(lambda tweet: TextBlob(tweet).sentiment)
-        st.text('We look at our dataset after more pre-processing steps')
+        st.write('We look at our dataset after more pre-processing steps')
         st.write(train.head(50))
         
         sentiment_series=train['sentiment'].tolist()
@@ -176,6 +178,22 @@ def app():
         counts = result['Sentiment'].value_counts()
         st.write(counts)
 
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+
+        #reads the sample count from the previous line
+        labels = ['Negative','Positive']
+        sizes = [counts[0], counts[1]]
+
+        custom_colours = ['#ff7675', '#74b9ff']
+
+        fig = plt.figure(figsize=(8, 3), dpi=100)
+        plt.subplot(1, 2, 1)
+        plt.pie(sizes, labels = labels, textprops={'fontsize': 10}, startangle=140, autopct='%1.0f%%', colors=custom_colours, explode=[0, 0.05])
+        plt.subplot(1, 2, 2)
+        sns.barplot(x = result['Sentiment'].unique(), y = result['Sentiment'].value_counts(), palette= 'viridis')
+        
+        st.pyplot(fig)
 
 # run the app
 if __name__ == "__main__":
