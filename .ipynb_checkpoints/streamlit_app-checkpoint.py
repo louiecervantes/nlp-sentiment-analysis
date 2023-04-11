@@ -134,9 +134,9 @@ def app():
         def cleanse(word):
             rx = re.compile(r'\D*\d')
             if rx.match(word):
-            return ''
-        
+                return ''      
             return word
+        
         def remove_alphanumeric(strings):
             nstrings= [" ".join(filter(None, (cleanse(word) for word in string.split()))) for string in strings.split()]
             str1=' '.join(nstrings)
