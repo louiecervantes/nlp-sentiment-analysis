@@ -59,6 +59,7 @@ def app():
     else:
         from spacy.cli import download
         download("en_core_web_sm")
+        nlp = spacy.load('en_core_web_sm', disable=['ner'])
 
     st.title("TextBlob Sentiment Analysis")      
     st.subheader("(c) 2023 Louie F. Cervantes, M.Eng.")
@@ -153,6 +154,7 @@ def app():
         
         st.write('We lemmatize the words...')
         train['text']=train['text'].apply(lemmatize_text)
+        
         train['sentiment']=train['text'].apply(lambda tweet: TextBlob(tweet).sentiment)
         st.text('We look at our dataset after more pre-processing steps')
         st.write(train.head(50))
