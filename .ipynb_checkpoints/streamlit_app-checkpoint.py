@@ -195,8 +195,10 @@ def app():
                       \nThis process could take up to several minutes to complete. Please wait....')
 
             train['text']=train['text'].apply(lemmatize_text)
-
+            
+            #We use the TextBlob tweet sentiment function to get the sentiment
             train['sentiment']=train['text'].apply(lambda tweet: TextBlob(tweet).sentiment)
+            
             st.write('We look at our dataset after more pre-processing steps')
             st.write(train.head(50))
 
@@ -213,7 +215,7 @@ def app():
             result.loc[result['label']==0, 'Sentiment_label'] = 0
             
             st.write('We view the dataset after the sentiment labels are updated.')
-            st.write(result.head(50))
+            st.write(result.head(500))
 
             counts = result['Sentiment'].value_counts()
             st.write(counts)
