@@ -40,12 +40,12 @@ def app():
     st.subheader('Sentiment Analysis')
     st.write("Sentiment analysis is the process of determining the emotional tone of a \
     piece of text. TextBlob provides two properties for sentiment analysis: polarity and \
-    subjectivity. /n/nPolarity refers to the degree to which the text expresses a positive \
+    subjectivity. \n\nPolarity refers to the degree to which the text expresses a positive \
     or negative sentiment. Polarity is represented as a float value between -1.0 and 1.0, \
     where -1.0 represents a completely negative sentiment, 0.0 represents a neutral \
     sentiment, and 1.0 represents a completely positive sentiment./n/nSubjectivity, on the \
     other hand, refers to the degree to which the text expresses a subjective or objective \
-    viewpoint. Subjectivity is also represented as a float value between 0.0 and 1.0, where \
+    viewpoint. \n\nSubjectivity is also represented as a float value between 0.0 and 1.0, where \
     0.0 represents a completely objective viewpoint and 1.0 represents a completely \
     subjective viewpoint.")
     
