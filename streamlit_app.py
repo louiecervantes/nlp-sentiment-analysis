@@ -154,6 +154,8 @@ def app():
             st.text('Removing escape sequences...')
             train.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True, inplace=True)
 
+            st.write(train.head(50))
+            
             st.text('Removing non ascii data...')
             train['text']=train['text'].str.encode('ascii', 'ignore').str.decode('ascii')
          
