@@ -110,7 +110,7 @@ def app():
             str1=' '.join(nstrings)
             return str1
         
-        train = pd.DataFrame()
+        train1 = pd.DataFrame()
         
         if st.button('Load Dataset'):  
             df = pd.read_csv('TextBlobTrain.csv')
@@ -118,14 +118,14 @@ def app():
             st.write('Dataset shape: ')
             st.text(df.shape)
             
-
             #Randomly select samples
             label_0=df[df['label']==0].sample(n=500)
             label_1=df[df['label']==1].sample(n=500)
-            train=pd.concat([label_1, label_0])
             
+            train = pd.concat([label_1, label_0])
+
             #remember this very useful function to randomly rearrange the dataset
-            train=shuffle(train)
+            train = shuffle(train)
             
             st.write('We then randomly select 500 samples of positive reviews and \
             500 samples of negative reviews.  Remember the labels were added by \
@@ -138,9 +138,10 @@ def app():
             
             st.write('Checking for null values. Do not proceed if we find a null value.')
             st.write(train.isnull().sum())
- 
+            train1 = train.copy()
+            
         if st.button('Begin Processing'):  
-            st.write(train.head(50))
+            st.write(train1.head(50))
             
             st.write('We begin pre-processing the data.  The steps are necessary to clean up \
             the dataset and achieve better results from the classifier. Some steps are \
