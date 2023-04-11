@@ -47,7 +47,7 @@ def app():
         st.text(result)
         
     st.subheader('Movie Review Dataset')
-    st.write('We load a movie review dataset containing 2 columns: text - contains the text of the review, and label - contains the 0 for negative and 1 for positive review')
+    st.write('We load a movie review dataset containing 2 columns: text - contains the text of the review, and label - contains the 0 for negative and 1 for positive reviews. The dataset contains 40,000 rows pf data.')
     if st.button('Load Dataset'):  
         result = TextBlob(user_input).sentiment
         st.text(result)

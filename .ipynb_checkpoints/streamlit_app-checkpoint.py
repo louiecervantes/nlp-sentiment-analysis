@@ -38,7 +38,7 @@ def app():
     st.write('Let us try the following statements.  Copy-paste the statement into the textbox and click the button to get the sentiment.')
     st.write('He is a very good boy.  \
               \nHe is not a good boy. \
-              \nEverybody says this man is poor')
+              \nEverybody says this man is poor.')
     
     user_input = st.text_input("Input the statement here:")
     
@@ -47,7 +47,7 @@ def app():
         st.text(result)
         
     st.subheader('Movie Review Dataset')
-    st.write('We load a movie review dataset containing 2 columns: text - contains the text of the review, and label - contains the 0 for negative and 1 for positive review')
+    st.write('We load a movie review dataset containing 2 columns: text - contains the text of the review, and label - contains the 0 for negative and 1 for positive reviews. The dataset contains 40,000 rows pf data.')
     if st.button('Load Dataset'):  
         result = TextBlob(user_input).sentiment
         st.text(result)
