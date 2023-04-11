@@ -110,6 +110,11 @@ def app():
             str1=' '.join(nstrings)
             return str1
         
+        def lemmatize_text(text):
+            text = nlp(text)
+            text = ' '.join([word.lemma_ if word.lemma_ != '-PRON-' else word.text for word in text])
+            return text
+        
         if st.button('Load Dataset'):  
             df = pd.read_csv('TextBlobTrain.csv')
             st.write(df.head(20))
@@ -149,9 +154,7 @@ def app():
 
             st.text('Removing escape sequences...')
             train.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True, inplace=True)
-
-
-            
+         
             st.text('Removing non ascii data...')
             train['text']=train['text'].str.encode('ascii', 'ignore').str.decode('ascii')
          
@@ -180,19 +183,13 @@ def app():
             st.write('Removing numbers...')
             train['text']=train['text'].apply(remove_numbers) 
             
-            st.text('We look at our dataset after the pre-processing steps')
-            st.write(train.head(50))
-            
+            st.text('We look at our dataset after more pre-processing steps')
+            st.write(train.head(50))    
 
             st.write('Removing alpha numeric data...')
             train['text']=train['text'].apply(remove_alphanumeric)
             st.text('We look at our dataset after the pre-processing steps')
             st.write(train.head(50))
-
-            def lemmatize_text(text):
-                text = nlp(text)
-                text = ' '.join([word.lemma_ if word.lemma_ != '-PRON-' else word.text for word in text])
-                return text
 
             st.write('We lemmatize the words. \
                       \nThis process could take up to several minutes to complete. Please wait....')
@@ -214,8 +211,9 @@ def app():
 
             result.loc[result['label']==1, 'Sentiment_label'] = 1
             result.loc[result['label']==0, 'Sentiment_label'] = 0
-
-            st.write(result)
+            
+            st.write('We view the dataset after the sentiment labels are updated.')
+            st.write(result.head(50)
 
             counts = result['Sentiment'].value_counts()
             st.write(counts)
