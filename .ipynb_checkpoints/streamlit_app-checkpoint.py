@@ -14,7 +14,7 @@ from sklearn.utils import shuffle
 import string
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import base64
 
 # Define the Streamlit app
 def app():
@@ -235,6 +235,15 @@ def app():
             sns.barplot(x = result['Sentiment'].unique(), y = result['Sentiment'].value_counts(), \
                     palette= 'viridis')
             st.pyplot(fig)
+            
+            # Save the dataframe to a CSV file
+            csv = result.to_csv(index=False)
+            if csv:
+                b64 = base64.b64encode(csv.encode()).decode()  # Convert to base64
+                href = f'<a href="data:file/csv;base64,{b64}" download="data.csv">Download CSV file</a>'
+                st.markdown(href, unsafe_allow_html=True)
+            else:
+                st.write("Error: Unable to generate CSV file.")
 
 # run the app
 if __name__ == "__main__":
