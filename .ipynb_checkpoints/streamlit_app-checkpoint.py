@@ -27,6 +27,7 @@ def app():
     stopwords_list.remove('no')
     stopwords_list.remove('not')
     tokenizer = ToktokTokenizer()
+    train = pd.DataFrame()
 
     st.title("TextBlob Sentiment Analysis")      
     st.subheader("(c) 2023 Louie F. Cervantes, M.Eng.")
