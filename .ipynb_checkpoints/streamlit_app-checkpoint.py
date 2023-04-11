@@ -51,7 +51,7 @@ def app():
     
     if st.button('Load Dataset'):  
         df = pd.read_csv('TextBlobTrain.csv')
-        st.write(df)
+        st.write(df.head(20))
     
 # run the app
 if __name__ == "__main__":
