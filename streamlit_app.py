@@ -67,6 +67,16 @@ def app():
         st.write(train.head(50))
         st.text('Checking for null values')
         st.text(train.isnull().sum())
+        
+        st.text('Doing pre-processing tasks...')
+        st.text('Removing punctionations and special characters...')
+        train.replace(r'^\s*$', np.nan, regex=True, inplace=True)
+        train.dropna(axis=0, how='any', inplace=True)
+        st.text('Removing escape sequences...')
+        train.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True, inplace=True)
+        
+        
+        
     
 # run the app
 if __name__ == "__main__":
