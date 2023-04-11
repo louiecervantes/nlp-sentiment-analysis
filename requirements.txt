@@ -1,0 +1,8 @@
+streamlit
+streamlit_option_menu
+nltk
+numpy
+scikit-learn
+pandas
+textblob
+spacy
