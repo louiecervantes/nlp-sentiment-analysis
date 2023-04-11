@@ -38,7 +38,7 @@ def app():
     st.write('Let us try the following statements.  Copy-paste the statement into the textbox and click the button to get the sentiment.')
     st.write('He is a very good boy.  \
               \nHe is not a good boy. \
-              \nEverybody says this man is poor')
+              \nEverybody says this man is poor.')
     
     user_input = st.text_input("Input the statement here:")
     
