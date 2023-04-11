@@ -31,9 +31,10 @@ def app():
     st.write('He is a very good boy.  \
               \nHe is not a good boy. \
               \nEverybody says this man is poor')
+    
     user_input = st.text_input("Input the statement here:")
     
-    if st.button('Get sentiment'):  
+    if st.button('Submit'):  
         result = 'Done.'
         #result = TextBlob(user_input).sentiment
         st.text(result)
