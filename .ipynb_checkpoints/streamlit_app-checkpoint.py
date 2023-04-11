@@ -213,7 +213,7 @@ def app():
             result.loc[result['label']==0, 'Sentiment_label'] = 0
             
             st.write('We view the dataset after the sentiment labels are updated.')
-            st.write(result.head(50)
+            st.write(result.head(50))
 
             counts = result['Sentiment'].value_counts()
             st.write(counts)
