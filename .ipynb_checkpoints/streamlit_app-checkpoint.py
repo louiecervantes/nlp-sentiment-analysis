@@ -65,6 +65,8 @@ def app():
         st.write('We then randomly select 5000 samples of positive reviews and 5000 samples of negative reviews')
         st.write('We display the first 50 rows of the training dataset')
         st.write(train.head(50))
+        st.text('Checking for null values')
+        st.text(train.isnull().sum())
     
 # run the app
 if __name__ == "__main__":
