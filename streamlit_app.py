@@ -34,7 +34,8 @@ def app():
     user_input = st.text_input("Input the statement here:")
     
     if st.button('Get sentiment'):  
-        result = TextBlob(user_input).sentiment
+        result = 'Done.'
+        #result = TextBlob(user_input).sentiment
         st.text(result)
     
 # run the app
