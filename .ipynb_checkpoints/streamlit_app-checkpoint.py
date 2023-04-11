@@ -52,7 +52,8 @@ def app():
     if st.button('Load Dataset'):  
         df = pd.read_csv('TextBlobTrain.csv')
         st.write(df.head(20))
-        st.write('Dataset shape: ' + df.shape)
+        st.write('Dataset shape: ')
+        st.write(df.shape)
     
 # run the app
 if __name__ == "__main__":
