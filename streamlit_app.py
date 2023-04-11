@@ -140,7 +140,8 @@ def app():
             st.write(train.isnull().sum())
  
         if st.button('Begin Processing'):  
-        
+            st.write(train.head(50))
+            
             st.write('We begin pre-processing the data.  The steps are necessary to clean up \
             the dataset and achieve better results from the classifier. Some steps are \
             resource-heavy so be patient and check the animated "running" indicator \
@@ -154,7 +155,7 @@ def app():
             st.text('Removing escape sequences...')
             train.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True, inplace=True)
 
-            st.write(train.head(50))
+
             
             st.text('Removing non ascii data...')
             train['text']=train['text'].str.encode('ascii', 'ignore').str.decode('ascii')
