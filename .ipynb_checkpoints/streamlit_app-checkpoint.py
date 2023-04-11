@@ -31,11 +31,11 @@ def app():
     st.write('He is a very good boy.  \
               \nHe is not a good boy. \
               \nEverybody says this man is poor')
-    user_input = st.text_input("Input the statement here:")   
-    with st.echo(code_location='below'):
-        if st.button('Get sentiment'):  
-            result = TextBlob(user_input).sentiment
-            st.text(result)
+    user_input = st.text_input("Input the statement here:")
+    
+    if st.button('Get sentiment'):  
+        result = TextBlob(user_input).sentiment
+        st.text(result)
     
 # run the app
 if __name__ == "__main__":
