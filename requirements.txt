@@ -6,3 +6,5 @@ pandas
 textblob
 spacy
 scikit-learn
+matplotlib
+seaborn
