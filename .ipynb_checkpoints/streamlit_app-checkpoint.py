@@ -27,7 +27,6 @@ def app():
     stopwords_list.remove('no')
     stopwords_list.remove('not')
     tokenizer = ToktokTokenizer()
-    train = pd.DataFrame()
 
     st.title("TextBlob Sentiment Analysis")      
     st.subheader("(c) 2023 Louie F. Cervantes, M.Eng.")
@@ -109,13 +108,16 @@ def app():
             nstrings= [" ".join(filter(None, (cleanse(word) for word in string.split()))) \
                        for string in strings.split()]
             str1=' '.join(nstrings)
-            return str1          
-            
+            return str1
+        
+        train = pd.DataFrame()
+        
         if st.button('Load Dataset'):  
             df = pd.read_csv('TextBlobTrain.csv')
             st.write(df.head(20))
             st.write('Dataset shape: ')
             st.text(df.shape)
+            
 
             #Randomly select samples
             label_0=df[df['label']==0].sample(n=500)
