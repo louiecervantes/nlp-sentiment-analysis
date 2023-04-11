@@ -77,7 +77,7 @@ def app():
         else:
             from spacy.cli import download
             download("en_core_web_sm")
-            nlp = spacy.load('en_core_web_sm', disable=['ner'])')
+            nlp = spacy.load('en_core_web_sm', disable=['ner'])
         
         def remove_punctuations(text):
             for punctuation in string.punctuation:
