@@ -53,7 +53,7 @@ def app():
         df = pd.read_csv('TextBlobTrain.csv')
         st.write(df.head(20))
         st.write('Dataset shape: ')
-        st.write(df.shape)
+        st.text(df.shape)
     
 # run the app
 if __name__ == "__main__":
