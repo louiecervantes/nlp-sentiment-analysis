@@ -47,7 +47,7 @@ def app():
         st.text(result)
         
     st.subheader('Movie Review Dataset')
-    st.write('We load a movie review dataset containing 2 columns: text - contains the text of the review, and label - contains the 0 for negative and 1 for positive reviews. The dataset contains 40,000 rows pf data.')
+    st.write('We load a movie review dataset containing 2 columns: text - contains the text of the review, and label - contains the 0 for negative and 1 for positive reviews. The dataset contains 40,000 rows pf data. We load the first 20 rows for veiwing.')
     
     if st.button('Load Dataset'):  
         df = pd.read_csv('TextBlobTrain.csv')
