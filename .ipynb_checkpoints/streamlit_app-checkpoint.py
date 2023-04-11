@@ -215,6 +215,7 @@ def app():
             result.loc[result['label']==0, 'Sentiment_label'] = 0
             
             st.write('We view the dataset after the sentiment labels are updated.')
+            result = result.sort_values(by=['Sentiment'], ascending=False)
             st.write(result.head(500))
 
             counts = result['Sentiment'].value_counts()
