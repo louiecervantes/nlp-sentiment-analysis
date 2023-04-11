@@ -18,7 +18,6 @@ import seaborn as sns
 
 # Define the Streamlit app
 def app():
-    df = pd.DataFrame()
     
     #do various initialization tasks
     nltk.download('stopwords')
@@ -137,10 +136,6 @@ def app():
             
             st.write('Checking for null values. Do not proceed if we find a null value.')
             st.write(train.isnull().sum())
-            df = train
-            
-        if st.button('Begin Processing'):  
-            st.write(df.head(50))
             
             st.write('We begin pre-processing the data.  The steps are necessary to clean up \
             the dataset and achieve better results from the classifier. Some steps are \
