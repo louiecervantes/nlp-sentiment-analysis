@@ -18,6 +18,24 @@ tokenizer = ToktokTokenizer()
 
 # Define the Streamlit app
 def app():
+    nltk.download('stopwords')
+    from nltk.corpus import stopwords
+    stopwords_list = stopwords.words('english')
+    #no and not are excluded from stopwords
+    stopwords_list.remove('no')
+    stopwords_list.remove('not')
+    
+    def custom_remove_stopwords(text, is_lower_case=False):
+        tokens = tokenizer.tokenize(text)
+        tokens = [token.strip() for token in tokens]
+        if is_lower_case:
+            filtered_tokens = [token for token in tokens if token not in stopwords_list]
+        else:
+            filtered_tokens = [token for token in tokens if token.lower() not in stopwords_list]
+        filtered_text = ' '.join(filtered_tokens)
+        return filtered_text
+    
+    
     nlp = []
     if 'en_core_web_sm' in spacy.util.get_installed_models():
         #disable named entity recognizer to reduce memory usage
@@ -69,11 +87,25 @@ def app():
         st.text(train.isnull().sum())
         
         st.text('Doing pre-processing tasks...')
-        st.text('Removing punctionations and special characters...')
+        st.text('Removing special characters...')
         train.replace(r'^\s*$', np.nan, regex=True, inplace=True)
         train.dropna(axis=0, how='any', inplace=True)
         st.text('Removing escape sequences...')
         train.replace(to_replace=[r"\\t|\\n|\\r", "\t|\n|\r"], value=["",""], regex=True, inplace=True)
+        st.text('Removing non ascii data...')
+        train['text']=train['text'].str.encode('ascii', 'ignore').str.decode('ascii')
+        
+        def remove_punctuations(text):
+            import string
+            for punctuation in string.punctuation:
+                text = text.replace(punctuation, '')
+            return text
+        st.write('Removing punctuations...')
+        train['text']=train['text'].apply(remove_punctuations)
+        st.write('In Natural Language Processing (NLP), stopwords refer to commonly occurring words in a language that are often filtered out from the text before processing. These words typically do not contribute much to the meaning of a sentence and are used primarily to connect other words together. \nExamples of stopwords in the English language include "the," "a," "an," "and," "in," "on," "at," "for," "to," "of," "with," and so on.')
+        st.write('Removing stop words...')
+        train['text']=train['text'].apply(custom_remove_stopwords)
+        
         
         
         
