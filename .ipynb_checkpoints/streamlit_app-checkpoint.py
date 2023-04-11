@@ -213,6 +213,7 @@ def app():
 
             result.loc[result['label']==1, 'Sentiment_label'] = 1
             result.loc[result['label']==0, 'Sentiment_label'] = 0
+            result.drop(['label'],axis=1, inplace=True)
             
             st.write('We view the dataset after the sentiment labels are updated.')
             result = result.sort_values(by=['Sentiment'], ascending=False)
