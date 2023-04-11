@@ -35,7 +35,23 @@ def app():
         filtered_text = ' '.join(filtered_tokens)
         return filtered_text
     
+    def remove_special_characters(text):
+        text = re.sub('[^a-zA-z0-9\s]', '', text)
+        return text
     
+    def remove_html(text):
+        import re
+        html_pattern = re.compile('<.*?>')
+        return html_pattern.sub(r' ', text)
+    
+    def remove_URL(text):
+        url = re.compile(r'https?://\S+|www\.\S+')
+        return url.sub(r' ', text)
+    
+    def remove_numbers(text):
+        text =''.join([i for i in text if not i.isdigit()])
+        return text
+
     nlp = []
     if 'en_core_web_sm' in spacy.util.get_installed_models():
         #disable named entity recognizer to reduce memory usage
@@ -87,7 +103,7 @@ def app():
         st.text(train.isnull().sum())
         
         st.text('Doing pre-processing tasks...')
-        st.text('Removing special characters...')
+        st.text('Removing symbols...')
         train.replace(r'^\s*$', np.nan, regex=True, inplace=True)
         train.dropna(axis=0, how='any', inplace=True)
         st.text('Removing escape sequences...')
@@ -105,6 +121,14 @@ def app():
         st.write('In Natural Language Processing (NLP), stopwords refer to commonly occurring words in a language that are often filtered out from the text before processing. These words typically do not contribute much to the meaning of a sentence and are used primarily to connect other words together. \nExamples of stopwords in the English language include "the," "a," "an," "and," "in," "on," "at," "for," "to," "of," "with," and so on.')
         st.write('Removing stop words...')
         train['text']=train['text'].apply(custom_remove_stopwords)
+        st.write('Removing special characters...')
+        train['text']=train['text'].apply(remove_special_characters)
+        st.write('Removing HTML...')
+        train['text']=train['text'].apply(remove_html)
+        st.write('Removing URL...')
+        train['text']=train['text'].apply(remove_URL)        
+        st.write('Removing numbers...')
+        train['text']=train['text'].apply(remove_numbers)            
         
         
         
