@@ -54,6 +54,17 @@ def app():
         st.write(df.head(20))
         st.write('Dataset shape: ')
         st.text(df.shape)
+        
+        #Randomly select samples
+        label_0=df[df['label']==0].sample(n=5000)
+        label_1=df[df['label']==1].sample(n=5000)
+        train=pd.concat([label_1, label_0])
+        
+        from sklearn.utils import shuffle
+        train=shuffle(train)
+        st.write('We then randomly select 5000 samples of positive reviews and 5000 samples of negative reviews')
+        st.write('We display the first 50 rows of the training dataset')
+        st.write(train.head(50))
     
 # run the app
 if __name__ == "__main__":
